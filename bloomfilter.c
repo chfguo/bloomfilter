@@ -75,8 +75,8 @@ uint64_t hash(const char* data, uint32_t len, uint64_t seed, uint64_t bits) {
     return MurmurHash64A(data, len, seed) % bits;
 }
 
-void add_to_bitarray(char *bitarr, uint64_t num){   /* num代表要插进数组中的数 */
-    bitarr[num >> SHIFT] |= (1 << (num & MASK));  /* MASK 为 0x7 */
+void add_to_bitarray(char *bitarr, uint64_t num){   
+    bitarr[num >> SHIFT] |= (1 << (num & MASK));  /* MASK is 0x7 */
 }
 
 int is_in_bitarray(char *bitarr, int num){
