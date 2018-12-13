@@ -26,8 +26,6 @@ for i in range(10000,20000):
         error += 1
 
 print('%s errors in 10000 samples'%error)
-
-    
 ```
 - LocalBloomFilter, a simple wrapper for BloomFilter.
 ```python
@@ -35,7 +33,7 @@ from bloomfilter import LocalBloomFilter
 lbf = LocalBloomFilter(1000,0.05)
 lbf.add(['apple','banana','C','China','china'])
 lbf.is_contain(['apple','Python','Cython','China','china'])
-lbf.clean()
+lbf.clean()   # set bit array to zero
 ```
 - RedisBloomFilter, a simple wrapper for BloomFilter uses Redis as backend
 ```python
