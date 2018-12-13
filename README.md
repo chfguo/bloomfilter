@@ -1,6 +1,6 @@
 # bloomfilter
 bloomfilter is a simple Bloom Filter lib for Python, it contains three class:
-- BloomFilter: it is in charge of calculating how much bits we need based on the given capacity and error.
+- BloomFilter: it is in charge of calculating how much bits we need based on the given capacity and error,
   and use Python Bytes as bit array. 
 ```python
 import random
