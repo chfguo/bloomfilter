@@ -76,11 +76,11 @@ uint64_t hash(const char* data, uint32_t len, uint64_t seed, uint64_t bits) {
 }
 
 void add_to_bitarray(char *bitarr, uint64_t num){   
-    bitarr[num >> SHIFT] |= (1 << (num & MASK));  /* MASK is 0x7 */
+    bitarr[num >> SHIFT] |= (1 << (7-num & MASK)));  /* MASK is 0x7 */
 }
 
 int is_in_bitarray(char *bitarr, int num){
-    return bitarr[num >> SHIFT] & (1 << (num & MASK));
+    return bitarr[num >> SHIFT] & (1 << (7-(num & MASK)));
 }
 
 void add(char *bitmap, const char *data, uint32_t len, uint64_t *seeds, uint32_t hashes, uint64_t bits){
@@ -88,17 +88,17 @@ void add(char *bitmap, const char *data, uint32_t len, uint64_t *seeds, uint32_t
     uint64_t position;
     for(i=0; i<hashes; i++){
         position = hash(data,len,seeds[i],bits);
-        bitmap[position >> SHIFT] |= (1 << (position & MASK));
+        bitmap[position >> SHIFT] |= (1 << (7-(position & MASK)));
     }
 }
 
 int is_contain(char *bitmap, const char *data, uint32_t len, uint64_t *seeds, uint32_t hashes, uint64_t bits){
     uint32_t i;
     uint64_t position = hash(data,len,seeds[0],bits);
-    int result = bitmap[position >> SHIFT] & (1 << (position & MASK));
+    int result = bitmap[position >> SHIFT] & (1 << (7-(position & MASK)));
     for(i=1; i<hashes; i++){
         position = hash(data,len,seeds[i],bits);
-        result = result&&(bitmap[position >> SHIFT] & (1 << (position & MASK)));
+        result = result&&(bitmap[position >> SHIFT] & (1 << (7-(position & MASK))));
         if(result == 0)
             break;
     }
